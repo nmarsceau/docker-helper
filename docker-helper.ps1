@@ -8,6 +8,25 @@ function dils {
   docker image ls --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}";
 }
 
+function dvls {
+  docker volume ls --format "table {{.Name}}\t{{.Driver}}";
+}
+
+function dcrm {
+  Param($container);
+  docker container rm $container;
+}
+
+function dirm {
+  Param($image);
+  docker image rm $image;
+}
+
+function dvrm {
+  Param($volume);
+  docker volume rm $volume;
+}
+
 function dcp {
   $protectedContainers = @("dev.strategic.smithdrug.com", "dev.microservices.smithdrug.com");
   docker container ls -a --filter "status=exited" --format "table {{.Names}}" | Select-Object -Skip 1 | ForEach-Object {
@@ -19,12 +38,20 @@ function dcp {
 }
 
 function dip {
-  docker image ls | Select-String ":<none>" | ForEach-Object {
-    docker image rm (-split $_)[1];
-  }
+  docker image prune --force;
 }
 
 function dshell {
   Param($container);
   docker container exec -it $container /bin/bash;
+}
+
+function dis {
+  Param($container, $outputFile);
+  docker image save --output $outputFile;
+}
+
+function dil {
+  Param($imageFile);
+  docker image load --input $imageFile;
 }

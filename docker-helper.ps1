@@ -58,7 +58,6 @@ function dil {
 
 function dc {
   Param($project, $direction);
-  # $cannedResponses = (Get-Content "$PSScriptRoot\can-it.json" | ConvertFrom-Json).cannedResponses;
   $dockerComposeProjects = (Get-Content config.json | ConvertFrom-Json).dockerComposeProjects;
   If ($null -ne $project -and $null -ne $dockerComposeProjects[$project]) {
     $dockerComposeFile = $dockerComposeProjects[$project].composeFile;

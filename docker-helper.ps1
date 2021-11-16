@@ -58,11 +58,11 @@ function dil {
 
 function dc {
   Param($project, $direction);
-  $dockerComposeProjects = (Get-Content config.json | ConvertFrom-Json).dockerComposeProjects;
-  If ($null -ne $project -and $null -ne $dockerComposeProjects[$project]) {
-    $dockerComposeFile = $dockerComposeProjects[$project].composeFile;
+  $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects;
+  If ($null -ne $project -and $null -ne $dockerComposeProjects.($project)) {
+    $dockerComposeFile = $dockerComposeProjects.($project).composeFile;
     If ('up' -eq $direction) {
-      $composeUpCommands = $dockerComposeProjects[$project].composeUpCommands;
+      $composeUpCommands = $dockerComposeProjects.($project).composeUpCommands;
       If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.before) {
         Foreach ($command in $composeUpCommands.before) {
           Invoke-Expression $command;
@@ -76,7 +76,7 @@ function dc {
       }
     }
     Elseif ('down' -eq $direction) {
-      $composeDownCommands = $dockerComposeProjects[$project].composeDownCommands;
+      $composeDownCommands = $dockerComposeProjects.($project).composeDownCommands;
       If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.before) {
         Foreach ($command in $composeDownCommands.before) {
           Invoke-Expression $command;

@@ -55,3 +55,42 @@ function dil {
   Param($imageFile);
   docker image load --input $imageFile;
 }
+
+function dc {
+  Param($project, $direction);
+  # $cannedResponses = (Get-Content "$PSScriptRoot\can-it.json" | ConvertFrom-Json).cannedResponses;
+  $dockerComposeProjects = (Get-Content config.json | ConvertFrom-Json).dockerComposeProjects;
+  If ($null -ne $project -and $null -ne $dockerComposeProjects[$project]) {
+    $dockerComposeFile = $dockerComposeProjects[$project].composeFile;
+    If ('up' -eq $direction) {
+      $composeUpCommands = $dockerComposeProjects[$project].composeUpCommands;
+      If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.before) {
+        Foreach ($command in $composeUpCommands.before) {
+          Invoke-Expression $command;
+        }
+      }
+      docker-compose --file $dockerComposeFile up -d;
+      If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.after) {
+        Foreach ($command in $composeUpCommands.after) {
+          Invoke-Expression $command;
+        }
+      }
+    }
+    Elseif ('down' -eq $direction) {
+      $composeDownCommands = $dockerComposeProjects[$project].composeDownCommands;
+      If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.before) {
+        Foreach ($command in $composeDownCommands.before) {
+          Invoke-Expression $command;
+        }
+      }
+      docker-compose --file $dockerComposeFile down;
+      If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.after) {
+        Foreach ($command in $composeDownCommands.after) {
+          Invoke-Expression $command;
+        }
+      }
+    }
+    Else {Write-Output 'Invalid direction specified.';}
+  }
+  Else {Write-Output 'Invalid project specified.';}
+}

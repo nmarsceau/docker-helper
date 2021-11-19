@@ -93,3 +93,42 @@ function dc {
   }
   Else {Write-Output 'Invalid project specified.';}
 }
+
+function db {
+  Param($project, $environment, [switch]$push, [switch]$rmi, [switch]$noCache);
+  $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json;
+  If ($null -eq $project -or $null -eq $environment) {
+    Write-Output 'Please specify both a project and environment.';
+  }
+  Else {
+    $projectConfig = $config.dockerBuildProjects.($project);
+    If ($null -eq $projectConfig) {
+      Write-Output 'Invalid project specified.';
+    }
+    Else {
+      $tag = $projectConfig.tags.($environment);
+      If ($null -eq $tag) {
+        Write-Output 'Invalid environment specified.';
+      }
+      Else {
+        $directory = $projectConfig.directory;
+        If ($null -eq $directory) {
+          Write-Output 'Invalid config. No project directory specified.';
+        }
+        Else {
+          $cacheFlag = If ($noCache) {'--no-cache'} Else {''};
+          docker image build $cacheFlag --tag $tag $directory --build-arg APP_ENV=$environment;
+          If ($?) {
+            If ($push) {
+              ForEach ($credential in $config.dockerPushCredentials) {
+                Write-Output $credential.password | docker login $credential.domain --username $credential.username --password-stdin;
+              }
+              docker image push $tag;
+            }
+            If ($rmi) {docker image rm $tag;}
+          }
+        }
+      }
+    }
+  }
+}

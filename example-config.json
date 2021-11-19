@@ -30,7 +30,7 @@
       "composeFile": "C:\\path\\to\\docker-compose.yml"
     }
   },
-  "dockerBuildProject": {
+  "dockerBuildProjects": {
     "blog": {
       "tags": {
         "development": "ghcr.io/username/blog:development",
@@ -55,5 +55,22 @@
       },
       "directory": "C:\\path\\to\\project\\directory\\"
     }
-  }
+  },
+  "dockerPushCredentials": [
+    {
+      "domain": "docker.pkg.github.com",
+      "username": "username",
+      "password": "personal_access_token"
+    },
+    {
+      "domain": "ghcr.io",
+      "username": "username",
+      "password": "personal_access_token"
+    },
+    {
+      "domain": "another_container_registry",
+      "username": "username",
+      "password": "password"
+    }
+  ]
 }

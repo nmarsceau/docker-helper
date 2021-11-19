@@ -94,7 +94,7 @@ function dc {
   Else {Write-Output 'Invalid project specified.';}
 }
 
-function db {
+function dib {
   Param($project, $environment, [switch]$push, [switch]$rmi, [switch]$noCache);
   $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json;
   If ($null -eq $project -or $null -eq $environment) {

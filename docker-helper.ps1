@@ -64,13 +64,13 @@ function dc {
     If ('up' -eq $direction) {
       $composeUpCommands = $dockerComposeProjects.($project).composeUpCommands;
       If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.before) {
-        Foreach ($command in $composeUpCommands.before) {
+        ForEach ($command in $composeUpCommands.before) {
           Invoke-Expression $command;
         }
       }
       docker-compose --file $dockerComposeFile up -d;
       If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.after) {
-        Foreach ($command in $composeUpCommands.after) {
+        ForEach ($command in $composeUpCommands.after) {
           Invoke-Expression $command;
         }
       }
@@ -78,13 +78,13 @@ function dc {
     Elseif ('down' -eq $direction) {
       $composeDownCommands = $dockerComposeProjects.($project).composeDownCommands;
       If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.before) {
-        Foreach ($command in $composeDownCommands.before) {
+        ForEach ($command in $composeDownCommands.before) {
           Invoke-Expression $command;
         }
       }
       docker-compose --file $dockerComposeFile down;
       If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.after) {
-        Foreach ($command in $composeDownCommands.after) {
+        ForEach ($command in $composeDownCommands.after) {
           Invoke-Expression $command;
         }
       }

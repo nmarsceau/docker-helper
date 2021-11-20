@@ -23,11 +23,21 @@ function dcls {
 }
 
 function dils {
-  docker image ls --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}";
+  Param([switch] $size, [switch] $digest);
+  $columns = [System.Collections.Generic.List[string]]@('{{.Repository}}:{{.Tag}}', '{{.ID}}', '{{.CreatedSince}}');
+  If ($size) {$columns.Add('{{.Size}}');}
+  If ($digest) {$columns.Add('{{.Digest}}');}
+  $formatString = $columns -join '\t';
+  docker image ls --format "table $formatString";
 }
 
 function dvls {
-  docker volume ls --format "table {{.Name}}\t{{.Driver}}";
+  Param([switch] $scope, [switch] $mountPoint);
+  $columns = [System.Collections.Generic.List[string]]@('{{.Name}}', '{{.Driver}}');
+  If ($scope) {$columns.Add('{{.Scope}}');}
+  If ($mountPoint) {$columns.Add('{{.Mountpoint}}');}
+  $formatString = $columns -join '\t';
+  docker volume ls --format "table $formatString";
 }
 
 function dcrm {

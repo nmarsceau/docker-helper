@@ -1,7 +1,25 @@
 function dcls {
-  Param([switch] $a);
-  If ($a) {$_a = '-a';} Else {$_a = '';}
-  docker container ls $_a --format "table {{.Names}}\t{{.ID}}\t{{.Status}}";
+  Param(
+    [switch] $all,
+    [switch] $created,
+    [switch] $runningFor,
+    [switch] $ports,
+    [switch] $mounts,
+    [switch] $size,
+    [switch] $image,
+    [switch] $command
+  );
+  $allFlag = If ($all) {'--all'} Else {''};
+  $columns = [System.Collections.Generic.List[string]]@('{{.Names}}', '{{.ID}}', '{{.State}} ({{.Status}})');
+  If ($created) {$columns.Add('{{.CreatedAt}}');}
+  If ($runningFor) {$columns.Add('{{.RunningFor}}');}
+  If ($ports) {$columns.Add('{{.Ports}}');}
+  If ($mounts) {$columns.Add('{{.Mounts}}');}
+  If ($size) {$columns.Add('{{.Size}}');}
+  If ($image) {$columns.Add('{{.Image}}');}
+  If ($command) {$columns.Add('{{.Command}}');}
+  $formatString = $columns -join '\t';
+  docker container ls $allFlag --format "table $formatString";
 }
 
 function dils {

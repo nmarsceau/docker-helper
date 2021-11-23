@@ -1,0 +1,171 @@
+{
+  "commands": {
+    "dcls": {
+      "fullDockerCommand": "docker container ls",
+      "parameters": [
+        {
+          "name": "-all",
+          "description": "List all containers, including stopped ones."
+        },
+        {
+          "name": "-created",
+          "description": "Add the container's created time to the output."
+        },
+        {
+          "name": "-runningFor",
+          "description": "Add the container's running time to the output."
+        },
+        {
+          "name": "-ports",
+          "description": "Add the container's ports to the output."
+        },
+        {
+          "name": "-mounts",
+          "description": "Add the container's mounts to the output."
+        },
+        {
+          "name": "-size",
+          "description": "Add the container's size to the output."
+        },
+        {
+          "name": "-image",
+          "description": "Add the container's image to the output."
+        },
+        {
+          "name": "-command",
+          "description": "Add the container's command to the output."
+        }
+      ]
+    },
+    "dcrm": {
+      "fullDockerCommand": "docker container rm",
+      "parameters": [
+        {
+          "name": "container",
+          "description": "The ID or name of the container to be deleted."
+        }
+      ]
+    },
+    "dcp": {
+      "fullDockerCommand": "docker container prune",
+      "parameters": []
+    },
+    "dils": {
+      "fullDockerCommand": "docker image ls",
+      "parameters": [
+        {
+          "name": "-size",
+          "description": "Add the image's size to the output."
+        },
+        {
+          "name": "-digest",
+          "description": "Add the image's digest to the output."
+        }
+      ]
+    },
+    "dirm": {
+      "fullDockerCommand": "docker image rm",
+      "parameters": [
+        {
+          "name": "image",
+          "description": "The ID of the image to be deleted."
+        }
+      ]
+    },
+    "dip": {
+      "fullDockerCommand": "docker image prune",
+      "parameters": []
+    },
+    "dib": {
+      "fullDockerCommand": "docker image build",
+      "parameters": [
+        {
+          "name": "project",
+          "description": "The project to build an image for."
+        },
+        {
+          "name": "environment",
+          "description": "The environment to build an image for."
+        },
+        {
+          "name": "-push",
+          "description": "Whether to push the image after building it."
+        },
+        {
+          "name": "-rmi",
+          "description": "Whether to remove the image after pushing it."
+        },
+        {
+          "name": "-noCache",
+          "description": "Whether to ignore cached images when building."
+        }
+      ]
+    },
+    "dis": {
+      "fullDockerCommand": "docker image save",
+      "parameters": [
+        {
+          "name": "container",
+          "description": "The container to be saved."
+        },
+        {
+          "name": "outputFile",
+          "description": "The file to save the image archive in."
+        }
+      ]
+    },
+    "dil": {
+      "fullDockerCommand": "docker image load",
+      "parameters": [
+        {
+          "name": "imageFile",
+          "description": "The image archive file to load."
+        }
+      ]
+    },
+    "dvls": {
+      "fullDockerCommand": "docker volume ls",
+      "parameters": [
+        {
+          "name": "-scope",
+          "description": "Add the volume's scope to the output."
+        },
+        {
+          "name": "-mountPoint",
+          "description": "Add the volume's mount point to the output."
+        }
+      ]
+    },
+    "dvrm": {
+      "fullDockerCommand": "docker volume rm",
+      "parameters": [
+        {
+          "name": "volume",
+          "description": "The name of the volume to be deleted."
+        }
+      ]
+    },
+    "dshell": {
+      "fullDockerCommand": "docker container exec -it /bin/bash",
+      "parameters": [
+        {
+          "name": "container",
+          "description": "The ID or name of the container to open a shell in."
+        }
+      ]
+    },
+    "dc": {
+      "fullDockerCommand": "docker-compose",
+      "parameters": [
+        {
+          "name": "project",
+          "description": "Which project to docker-compose."
+        },
+        {
+          "name": "direction",
+          "description": "Which direction to docker-compose."
+        }
+      ]
+    }
+  }
+}

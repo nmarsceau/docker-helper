@@ -160,3 +160,42 @@ function dib {
     }
   }
 }
+
+function dhelp {
+  Param($command = $null);
+  $helpInformation = Get-Content "$PSScriptRoot\help.json" | ConvertFrom-Json;
+  If ($null -eq $command) {
+    Write-Output "`nDocker Helper is a collection of helper functions for working with Docker.`n";
+    $availableCommands = ForEach ($command in $helpInformation.commands.PSObject.Properties) {
+      New-Object PSObject -Property @{
+        Command = $command.Name
+        "Docker Equivalent" = $command.Value.fullDockerCommand
+      }
+    }
+    $availableCommands | Format-Table @{Expression='Command'; Width=10}, "Docker Equivalent";
+    Write-Output "`nRun ``dhelp [command]`` for more information about a specific command.`n";
+  }
+  Else {
+    $command = $command.Trim().ToLower();
+    $commandInformation = $helpInformation.commands.($command);
+    if ($null -eq $commandInformation) {
+      Write-Output "`nInvalid command specified: '$command'`n";
+    }
+    Else {
+      Write-Output "`n$($command): $($commandInformation.fullDockerCommand)";
+      Write-Output "`nParameters:";
+      If ($null -ne $commandInformation.parameters -and $commandInformation.parameters.Count -gt 0) {
+        $parameters = ForEach ($parameter in $commandInformation.parameters) {
+          New-Object PSObject -Property @{
+            Name = $parameter.name
+            Description = $parameter.description
+          };
+        }
+        $parameters | Format-Table @{Expression='Name'; Width=20}, Description;
+      }
+      Else {
+        Write-Output "`nNone.`n";
+      }
+    }
+  }
+}

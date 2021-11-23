@@ -1,76 +1,76 @@
 {
-  "dockerComposeProjects": {
-    "blog": {
-      "composeFile": "C:\\path\\to\\docker-compose.yml",
-      "composeUpCommands": {
-        "before": [
-          "command1",
-          "command2"
-        ],
-        "after": [
-          "command1",
-          "command2"
-        ]
-      },
-      "composeDownCommands": {
-        "before": [
-          "command1",
-          "command2"
-        ],
-        "after": [
-          "command1",
-          "command2"
-        ]
-      }
+    "dockerComposeProjects": {
+        "blog": {
+            "composeFile": "C:\\path\\to\\docker-compose.yml",
+            "composeUpCommands": {
+                "before": [
+                    "command1",
+                    "command2"
+                ],
+                "after": [
+                    "command1",
+                    "command2"
+                ]
+            },
+            "composeDownCommands": {
+                "before": [
+                    "command1",
+                    "command2"
+                ],
+                "after": [
+                    "command1",
+                    "command2"
+                ]
+            }
+        },
+        "app": {
+            "composeFile": "C:\\path\\to\\docker-compose.yml"
+        },
+        "website": {
+            "composeFile": "C:\\path\\to\\docker-compose.yml"
+        }
     },
-    "app": {
-      "composeFile": "C:\\path\\to\\docker-compose.yml"
+    "dockerBuildProjects": {
+        "blog": {
+            "tags": {
+                "development": "ghcr.io/username/blog:development",
+                "staging": "ghcr.io/username/blog:staging",
+                "production": "ghcr.io/username/blog:production"
+            },
+            "directory": "C:\\path\\to\\project\\directory\\"
+        },
+        "app": {
+            "tags": {
+                "development": "ghcr.io/username/app:development",
+                "staging": "ghcr.io/username/app:staging",
+                "production": "ghcr.io/username/app:production"
+            },
+            "directory": "C:\\path\\to\\project\\directory\\"
+        },
+        "website": {
+            "tags": {
+                "development": "ghcr.io/username/website:development",
+                "staging": "ghcr.io/username/website:staging",
+                "production": "ghcr.io/username/website:production"
+            },
+            "directory": "C:\\path\\to\\project\\directory\\"
+        }
     },
-    "website": {
-      "composeFile": "C:\\path\\to\\docker-compose.yml"
-    }
-  },
-  "dockerBuildProjects": {
-    "blog": {
-      "tags": {
-        "development": "ghcr.io/username/blog:development",
-        "staging": "ghcr.io/username/blog:staging",
-        "production": "ghcr.io/username/blog:production"
-      },
-      "directory": "C:\\path\\to\\project\\directory\\"
-    },
-    "app": {
-      "tags": {
-        "development": "ghcr.io/username/app:development",
-        "staging": "ghcr.io/username/app:staging",
-        "production": "ghcr.io/username/app:production"
-      },
-      "directory": "C:\\path\\to\\project\\directory\\"
-    },
-    "website": {
-      "tags": {
-        "development": "ghcr.io/username/website:development",
-        "staging": "ghcr.io/username/website:staging",
-        "production": "ghcr.io/username/website:production"
-      },
-      "directory": "C:\\path\\to\\project\\directory\\"
-    }
-  },
-  "dockerPushCredentials": [
-    {
-      "domain": "docker.pkg.github.com",
-      "username": "username",
-      "password": "personal_access_token"
-    },
-    {
-      "domain": "ghcr.io",
-      "username": "username",
-      "password": "personal_access_token"
-    },
-    {
-      "domain": "another_container_registry",
-      "username": "username",
-      "password": "password"
-    }
-  ]
+    "dockerPushCredentials": [
+        {
+            "domain": "docker.pkg.github.com",
+            "username": "username",
+            "password": "personal_access_token"
+        },
+        {
+            "domain": "ghcr.io",
+            "username": "username",
+            "password": "personal_access_token"
+        },
+        {
+            "domain": "another_container_registry",
+            "username": "username",
+            "password": "password"
+        }
+    ]
 }

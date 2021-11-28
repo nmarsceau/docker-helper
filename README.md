@@ -8,4 +8,4 @@ A collection of helper functions for working with Docker, written in PowerShell.
 
 2. Add the following line to your PowerShell profile:
 
-    `. C:\path\to\the\script\`
+    `. C:\path\to\docker-helper.ps1`

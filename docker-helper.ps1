@@ -56,13 +56,7 @@ function dvrm {
 }
 
 function dcp {
-    $protectedContainers = @("dev.strategic.smithdrug.com", "dev.microservices.smithdrug.com");
-    docker container ls -a --filter "status=exited" --format "table {{.Names}}" | Select-Object -Skip 1 | ForEach-Object {
-        $containerName = (-split $_)[0];
-        If (-not ($protectedContainers -contains $containerName)) {
-            docker container rm $containerName;
-        }
-    }
+    docker container prune --force;
 }
 
 function dip {

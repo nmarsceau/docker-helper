@@ -10,7 +10,7 @@ function dcls {
         [switch] $command
     );
     $allFlag = If ($all) {'--all'} Else {''};
-    $columns = [System.Collections.Generic.List[string]]@('{{.Names}}', '{{.ID}}', '{{.State}} ({{.Status}})');
+    $columns = [System.Collections.Generic.List[string]]@('{{.Names}}', '{{.ID}}', '{{.State}}');
     If ($created) {$columns.Add('{{.CreatedAt}}');}
     If ($runningFor) {$columns.Add('{{.RunningFor}}');}
     If ($ports) {$columns.Add('{{.Ports}}');}

@@ -40,6 +40,11 @@ function dvls {
     docker volume ls --format "table $formatString";
 }
 
+function dcl {
+    Param($container);
+    docker container logs $container;
+}
+
 function dcrm {
     Param($container);
     docker container rm $container;

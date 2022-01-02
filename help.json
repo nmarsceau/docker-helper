@@ -37,6 +37,19 @@
                 }
             ]
         },
+        "dci": {
+            "fullDockerCommand": "docker container inspect",
+            "parameters": [
+                {
+                    "name": "container",
+                    "description": "The ID or name of the container to inspect."
+                },
+                {
+                    "name": "-size",
+                    "description": "Add the container's file size to the output."
+                }
+            ]
+        },
         "dcl": {
             "fullDockerCommand": "docker container logs",
             "parameters": [

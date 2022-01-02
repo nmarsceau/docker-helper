@@ -45,6 +45,12 @@ function dcl {
     docker container logs $container;
 }
 
+function dci {
+    Param($container, [switch] $size);
+    $sizeFlag = If ($size) {'--size'} Else {''};
+    docker container inspect $sizeFlag $container;
+}
+
 function dii {
     Param($image);
     docker image inspect $image;

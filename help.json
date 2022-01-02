@@ -59,6 +59,15 @@
                 }
             ]
         },
+        "dcs": {
+            "fullDockerCommand": "docker container stats",
+            "parameters": [
+                {
+                    "name": "container",
+                    "description": "The ID or name of the container for which to show stats."
+                }
+            ]
+        },
         "dcrm": {
             "fullDockerCommand": "docker container rm",
             "parameters": [

@@ -45,6 +45,11 @@ function dcl {
     docker container logs $container;
 }
 
+function dcs {
+    Param($container);
+    docker container stats $container;
+}
+
 function dci {
     Param($container, [switch] $size);
     $sizeFlag = If ($size) {'--size'} Else {''};

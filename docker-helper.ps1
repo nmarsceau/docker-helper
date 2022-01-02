@@ -45,6 +45,11 @@ function dcl {
     docker container logs $container;
 }
 
+function dii {
+    Param($image);
+    docker image inspect $image;
+}
+
 function dcrm {
     Param($container);
     docker container rm $container;

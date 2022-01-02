@@ -72,12 +72,21 @@
                 }
             ]
         },
+        "dii": {
+            "fullDockerCommand": "docker image inspect",
+            "parameters": [
+                {
+                    "name": "image",
+                    "description": "The ID or name of the image to inspect."
+                }
+            ]
+        },
         "dirm": {
             "fullDockerCommand": "docker image rm",
             "parameters": [
                 {
                     "name": "image",
-                    "description": "The ID of the image to be deleted."
+                    "description": "The ID or name of the image to be deleted."
                 }
             ]
         },

@@ -154,6 +154,15 @@
                 }
             ]
         },
+        "dvi": {
+            "fullDockerCommand": "docker volume inspect",
+            "parameters": [
+                {
+                    "name": "volume",
+                    "description": "The name of the volume to inspect."
+                }
+            ]
+        },
         "dvrm": {
             "fullDockerCommand": "docker volume rm",
             "parameters": [

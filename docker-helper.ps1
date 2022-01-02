@@ -50,6 +50,11 @@ function dii {
     docker image inspect $image;
 }
 
+function dvi {
+    Param($volume);
+    docker volume inspect $volume;
+}
+
 function dcrm {
     Param($container);
     docker container rm $container;

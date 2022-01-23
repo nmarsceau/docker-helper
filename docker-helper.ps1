@@ -143,7 +143,7 @@ function dc {
 }
 
 function dib {
-    Param($project, $environment, [switch]$push, [switch]$rmi, [switch]$noCache);
+    Param($project, $environment, [switch]$push, [switch]$remove, [switch]$noCache);
     $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json;
     If ($null -eq $project -or $null -eq $environment) {
         Write-Output 'Please specify both a project and environment.';
@@ -173,7 +173,7 @@ function dib {
                             }
                             docker image push $tag;
                         }
-                        If ($rmi) {docker image rm $tag;}
+                        If ($remove) {docker image rm $tag;}
                     }
                 }
             }

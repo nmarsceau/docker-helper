@@ -132,7 +132,7 @@
                     "description": "Whether to push the image after building it."
                 },
                 {
-                    "name": "-rmi",
+                    "name": "-remove",
                     "description": "Whether to remove the image after pushing it."
                 },
                 {

@@ -95,8 +95,8 @@ function dshell {
 }
 
 function dis {
-    Param($container, $outputFile);
-    docker image save --output $outputFile;
+    Param($image, $outputFile);
+    docker image save $image --output $outputFile;
 }
 
 function dil {

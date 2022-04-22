@@ -145,8 +145,8 @@
             "fullDockerCommand": "docker image save",
             "parameters": [
                 {
-                    "name": "container",
-                    "description": "The container to be saved."
+                    "name": "image",
+                    "description": "The image to be saved."
                 },
                 {
                     "name": "outputFile",

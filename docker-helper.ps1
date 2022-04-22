@@ -108,7 +108,15 @@ function dc {
     Param($project, $direction);
     $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects;
     If ($null -ne $project -and $null -ne $dockerComposeProjects.($project)) {
-        $dockerComposeFile = $dockerComposeProjects.($project).composeFile;
+        $composeFile = $dockerComposeProjects.($project).composeFile;
+        $envFile = $dockerComposeProjects.($project).envFile;
+        If ($null -eq $envFile) {
+            $envFileFlag = '';
+            $envFile = '';
+        }
+        Else {
+            $envFileFlag = '--env-file';
+        }
         If ('up' -eq $direction) {
             $composeUpCommands = $dockerComposeProjects.($project).composeUpCommands;
             If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.before) {
@@ -116,7 +124,7 @@ function dc {
                     Invoke-Expression $command;
                 }
             }
-            docker-compose --file $dockerComposeFile up -d;
+            docker-compose --file $composeFile $envFileFlag $envFile up -d;
             If ($null -ne $composeUpCommands -and $null -ne $composeUpCommands.after) {
                 ForEach ($command in $composeUpCommands.after) {
                     Invoke-Expression $command;
@@ -130,7 +138,7 @@ function dc {
                     Invoke-Expression $command;
                 }
             }
-            docker-compose --file $dockerComposeFile down;
+            docker-compose --file $composeFile $envFileFlag $envFile down;
             If ($null -ne $composeDownCommands -and $null -ne $composeDownCommands.after) {
                 ForEach ($command in $composeDownCommands.after) {
                     Invoke-Expression $command;

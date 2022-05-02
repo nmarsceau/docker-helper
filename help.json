@@ -1,6 +1,6 @@
 {
     "commands": {
-        "dcls": {
+        "dc-ls": {
             "fullDockerCommand": "docker container ls",
             "parameters": [
                 {
@@ -37,7 +37,7 @@
                 }
             ]
         },
-        "dci": {
+        "dc-inspect": {
             "fullDockerCommand": "docker container inspect",
             "parameters": [
                 {
@@ -50,7 +50,7 @@
                 }
             ]
         },
-        "dcl": {
+        "dc-logs": {
             "fullDockerCommand": "docker container logs",
             "parameters": [
                 {
@@ -59,7 +59,7 @@
                 }
             ]
         },
-        "dcs": {
+        "dc-stats": {
             "fullDockerCommand": "docker container stats",
             "parameters": [
                 {
@@ -68,7 +68,7 @@
                 }
             ]
         },
-        "dcrm": {
+        "dc-rm": {
             "fullDockerCommand": "docker container rm",
             "parameters": [
                 {
@@ -77,11 +77,11 @@
                 }
             ]
         },
-        "dcp": {
+        "dc-prune": {
             "fullDockerCommand": "docker container prune",
             "parameters": []
         },
-        "dils": {
+        "di-ls": {
             "fullDockerCommand": "docker image ls",
             "parameters": [
                 {
@@ -94,7 +94,7 @@
                 }
             ]
         },
-        "dii": {
+        "di-inspect": {
             "fullDockerCommand": "docker image inspect",
             "parameters": [
                 {
@@ -103,20 +103,7 @@
                 }
             ]
         },
-        "dirm": {
-            "fullDockerCommand": "docker image rm",
-            "parameters": [
-                {
-                    "name": "image",
-                    "description": "The ID or name of the image to be deleted."
-                }
-            ]
-        },
-        "dip": {
-            "fullDockerCommand": "docker image prune",
-            "parameters": []
-        },
-        "dib": {
+        "di-build": {
             "fullDockerCommand": "docker image build",
             "parameters": [
                 {
@@ -141,12 +128,12 @@
                 }
             ]
         },
-        "dis": {
+        "di-save": {
             "fullDockerCommand": "docker image save",
             "parameters": [
                 {
-                    "name": "container",
-                    "description": "The container to be saved."
+                    "name": "image",
+                    "description": "The image to be saved."
                 },
                 {
                     "name": "outputFile",
@@ -154,7 +141,7 @@
                 }
             ]
         },
-        "dil": {
+        "di-load": {
             "fullDockerCommand": "docker image load",
             "parameters": [
                 {
@@ -163,7 +150,20 @@
                 }
             ]
         },
-        "dvls": {
+        "di-rm": {
+            "fullDockerCommand": "docker image rm",
+            "parameters": [
+                {
+                    "name": "image",
+                    "description": "The ID or name of the image to be deleted."
+                }
+            ]
+        },
+        "di-prune": {
+            "fullDockerCommand": "docker image prune",
+            "parameters": []
+        },
+        "dv-ls": {
             "fullDockerCommand": "docker volume ls",
             "parameters": [
                 {
@@ -176,7 +176,7 @@
                 }
             ]
         },
-        "dvi": {
+        "dv-inspect": {
             "fullDockerCommand": "docker volume inspect",
             "parameters": [
                 {
@@ -185,7 +185,7 @@
                 }
             ]
         },
-        "dvrm": {
+        "dv-rm": {
             "fullDockerCommand": "docker volume rm",
             "parameters": [
                 {
@@ -194,7 +194,7 @@
                 }
             ]
         },
-        "dshell": {
+        "d-shell": {
             "fullDockerCommand": "docker container exec -it /bin/bash",
             "parameters": [
                 {
@@ -203,7 +203,7 @@
                 }
             ]
         },
-        "dc": {
+        "d-comp": {
             "fullDockerCommand": "docker-compose",
             "parameters": [
                 {

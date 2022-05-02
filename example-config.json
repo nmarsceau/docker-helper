@@ -1,30 +1,11 @@
 {
     "dockerComposeProjects": {
         "blog": {
-            "composeFile": "C:\\path\\to\\docker-compose.yml",
-            "composeUpCommands": {
-                "before": [
-                    "command1",
-                    "command2"
-                ],
-                "after": [
-                    "command1",
-                    "command2"
-                ]
-            },
-            "composeDownCommands": {
-                "before": [
-                    "command1",
-                    "command2"
-                ],
-                "after": [
-                    "command1",
-                    "command2"
-                ]
-            }
+            "composeFile": "C:\\path\\to\\docker-compose.yml"
         },
         "app": {
-            "composeFile": "C:\\path\\to\\docker-compose.yml"
+            "composeFile": "C:\\path\\to\\docker-compose.yml",
+            "envFile": "C:\\path\\to\\.env"
         },
         "website": {
             "composeFile": "C:\\path\\to\\docker-compose.yml"

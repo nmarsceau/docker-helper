@@ -1,11 +1,14 @@
-# docker-helper
+# Docker-Helper
 
 A collection of helper functions for working with Docker, written in PowerShell.
 
 ## Installation
 
-1. Clone this repository to your computer.
+1. Clone this repository to your PowerShell modules directory.
 
-2. Add the following line to your PowerShell profile:
+   The path to Docker-Helper.psm1 should be:
+   ```
+   C:\Users\your username\Documents\PowerShell\Modules\Docker-Helper\Docker-Helper.psm1
+   ```
 
-    `. C:\path\to\docker-helper.ps1`
+2. Run `d-help` for usage information. The module will be automatically imported the first time you use it.

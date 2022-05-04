@@ -50,6 +50,9 @@ FunctionsToExport = @(
     'Invoke-VolumeLS',
     'Invoke-VolumeInspect',
     'Invoke-VolumeRM',
+    'Invoke-NetworkLS',
+    'Invoke-NetworkRM',
+    'Invoke-NetworkPrune',
     'Invoke-Shell',
     'Invoke-DockerCompose',
     'Invoke-DockerHelp'
@@ -82,6 +85,9 @@ AliasesToExport = @(
     'dv-ls',
     'dv-inspect',
     'dv-rm',
+    'dn-ls',
+    'dn-rm',
+    'dn-prune',
     'd-shell',
     'd-comp',
     'd-help'

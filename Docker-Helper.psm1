@@ -11,13 +11,13 @@ function Invoke-ContainerLS {
     )
     $allFlag = $all ? '--all' : ''
     $columns = @('{{.Names}}', '{{.ID}}', '{{.Status}}')
-    If ($Created) {$columns += '{{.CreatedAt}}'}
-    If ($RunningFor) {$columns += '{{.RunningFor}}'}
-    If ($Ports) {$columns += '{{.Ports}}'}
-    If ($Mounts) {$columns += '{{.Mounts}}'}
-    If ($Size) {$columns += '{{.Size}}'}
-    If ($Image) {$columns += '{{.Image}}'}
-    If ($Command) {$columns += '{{.Command}}'}
+    if ($Created) {$columns += '{{.CreatedAt}}'}
+    if ($RunningFor) {$columns += '{{.RunningFor}}'}
+    if ($Ports) {$columns += '{{.Ports}}'}
+    if ($Mounts) {$columns += '{{.Mounts}}'}
+    if ($Size) {$columns += '{{.Size}}'}
+    if ($Image) {$columns += '{{.Image}}'}
+    if ($Command) {$columns += '{{.Command}}'}
     $formatString = $columns -join '\t'
     docker container ls $allFlag --format "table $formatString"
 }
@@ -154,8 +154,8 @@ function Invoke-ImageLS {
         [switch] $Digest
     )
     $columns = @('{{.Repository}}:{{.Tag}}', '{{.ID}}', '{{.CreatedSince}}')
-    If ($Size) {$columns += '{{.Size}}'}
-    If ($Digest) {$columns += '{{.Digest}}'}
+    if ($Size) {$columns += '{{.Size}}'}
+    if ($Digest) {$columns += '{{.Digest}}'}
     $formatString = $columns -join '\t'
     docker image ls --format "table $formatString"
 }
@@ -285,8 +285,8 @@ function Invoke-VolumeLS {
         [switch] $MountPoint
     )
     $columns = @('{{.Name}}', '{{.Driver}}')
-    If ($Scope) {$columns += '{{.Scope}}'}
-    If ($MountPoint) {$columns += '{{.Mountpoint}}'}
+    if ($Scope) {$columns += '{{.Scope}}'}
+    if ($MountPoint) {$columns += '{{.Mountpoint}}'}
     $formatString = $columns -join '\t'
     docker volume ls --format "table $formatString"
 }
@@ -322,6 +322,43 @@ function Invoke-VolumeRM {
 }
 
 Set-Alias 'dv-rm' Invoke-VolumeRM
+
+
+function Invoke-NetworkLS {
+    param(
+        [switch] $IPv6,
+        [switch] $Internal
+    )
+    $columns = @('{{.ID}}', '{{.Name}}', '{{.Driver}}', '{{.Scope}}')
+    if ($IPv6) {$columns += '{{.IPv6}}'}
+    if ($Internal) {$columns += '{{.Internal}}'}
+    $formatString = $columns -join '\t'
+    docker network ls --format "table $formatString"
+}
+
+Set-Alias 'dn-ls' Invoke-NetworkLS
+
+
+function Invoke-NetworkRM {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [Parameter(ValueFromPipeline)]
+        [string]$Network
+    )
+    process {
+        docker network rm $Network
+    }
+}
+
+Set-Alias 'dn-rm' Invoke-NetworkRM
+
+
+function Invoke-NetworkPrune {
+    docker network prune --force
+}
+
+Set-Alias 'dn-prune' Invoke-NetworkPrune
 
 
 function Invoke-Shell {

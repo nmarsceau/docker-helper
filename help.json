@@ -229,6 +229,32 @@
                 }
             ]
         },
+        "dn-ls": {
+            "fullDockerCommand": "docker network ls",
+            "parameters": [
+                {
+                    "name": "-IPv6",
+                    "description": "Add whether IPv6 is enabled for the network to the output."
+                },
+                {
+                    "name": "-Internal",
+                    "description": "Add whether the network is internal to the output."
+                }
+            ]
+        },
+        "dn-rm": {
+            "fullDockerCommand": "docker network rm",
+            "parameters": [
+                {
+                    "name": "network",
+                    "description": "The ID or name of the network to remove."
+                }
+            ]
+        },
+        "dn-prune": {
+            "fullDockerCommand": "docker network prune",
+            "parameters": []
+        },
         "d-shell": {
             "fullDockerCommand": "docker container exec -it /bin/bash",
             "parameters": [

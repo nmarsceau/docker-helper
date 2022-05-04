@@ -25,6 +25,57 @@ function Invoke-ContainerLS {
 Set-Alias 'dc-ls' Invoke-ContainerLS
 
 
+function Invoke-ContainerStart {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [Parameter(ValueFromPipeline)]
+        [string]$Container
+    )
+    process {
+        docker container start $Container
+    }
+}
+
+Set-Alias 'dc-start' Invoke-ContainerStart
+
+
+function Invoke-ContainerStop {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [Parameter(ValueFromPipeline)]
+        [string]$Container,
+
+        [ValidateRange(1, [int]::MaxValue)]
+        [int]$Time = 10
+    )
+    process {
+        docker container stop --time $Time $Container
+    }
+}
+
+Set-Alias 'dc-stop' Invoke-ContainerStop
+
+
+function Invoke-ContainerRestart {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [Parameter(ValueFromPipeline)]
+        [string]$Container,
+
+        [ValidateRange(1, [int]::MaxValue)]
+        [int]$Time = 10
+    )
+    process {
+        docker container restart --time $Time $Container
+    }
+}
+
+Set-Alias 'dc-restart' Invoke-ContainerRestart
+
+
 function Invoke-ContainerInspect {
     [CmdletBinding()]
     param(

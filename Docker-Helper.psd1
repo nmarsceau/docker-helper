@@ -32,6 +32,9 @@ PowerShellVersion = '7.1'
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
     'Invoke-ContainerLS',
+    'Invoke-ContainerStart',
+    'Invoke-ContainerStop',
+    'Invoke-ContainerRestart',
     'Invoke-ContainerInspect',
     'Invoke-ContainerLogs',
     'Invoke-ContainerStats',
@@ -61,6 +64,9 @@ VariablesToExport = '*'
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @(
     'dc-ls',
+    'dc-start',
+    'dc-stop',
+    'dc-restart',
     'dc-inspect',
     'dc-logs',
     'dc-stats',

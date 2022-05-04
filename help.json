@@ -37,6 +37,41 @@
                 }
             ]
         },
+        "dc-start": {
+            "fullDockerCommand": "docker container start",
+            "parameters": [
+                {
+                    "name": "container",
+                    "description": "The ID or name of the container to start."
+                }
+            ]
+        },
+        "dc-stop": {
+            "fullDockerCommand": "docker container stop",
+            "parameters": [
+                {
+                    "name": "container",
+                    "description": "The ID or name of the container to stop."
+                },
+                {
+                    "name": "time",
+                    "description": "How many seconds to wait before killing the container."
+                }
+            ]
+        },
+        "dc-restart": {
+            "fullDockerCommand": "docker container restart",
+            "parameters": [
+                {
+                    "name": "container",
+                    "description": "The ID or name of the container to restart."
+                },
+                {
+                    "name": "time",
+                    "description": "How many seconds to wait before killing the container."
+                }
+            ]
+        },
         "dc-inspect": {
             "fullDockerCommand": "docker container inspect",
             "parameters": [

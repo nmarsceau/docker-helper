@@ -28,9 +28,8 @@ Set-Alias 'dc-ls' Invoke-ContainerLS
 function Invoke-ContainerStart {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container
     )
     process {
         docker container start $Container
@@ -43,12 +42,12 @@ Set-Alias 'dc-start' Invoke-ContainerStart
 function Invoke-ContainerStop {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container,
 
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int]::MaxValue)]
-        [int]$Time = 10
+        [int] $Time = 10
     )
     process {
         docker container stop --time $Time $Container
@@ -61,12 +60,12 @@ Set-Alias 'dc-stop' Invoke-ContainerStop
 function Invoke-ContainerRestart {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container,
 
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int]::MaxValue)]
-        [int]$Time = 10
+        [int] $Time = 10
     )
     process {
         docker container restart --time $Time $Container
@@ -79,9 +78,8 @@ Set-Alias 'dc-restart' Invoke-ContainerRestart
 function Invoke-ContainerInspect {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container,
 
         [switch] $Size
     )
@@ -99,9 +97,8 @@ Set-Alias 'dc-inspect' Invoke-ContainerInspect
 function Invoke-ContainerLogs {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container
     )
     process {
         docker container logs $Container
@@ -114,9 +111,8 @@ Set-Alias 'dc-logs' Invoke-ContainerLogs
 function Invoke-ContainerStats {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container
     )
     process {
         docker container stats $Container
@@ -129,9 +125,8 @@ Set-Alias 'dc-stats' Invoke-ContainerStats
 function Invoke-ContainerRM {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Container
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Container
     )
     process {
         docker container rm $Container
@@ -166,9 +161,8 @@ Set-Alias 'di-ls' Invoke-ImageLS
 function Invoke-ImageInspect {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Image
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Image
     )
     process {
         docker image inspect $Image
@@ -180,15 +174,15 @@ Set-Alias 'di-inspect' Invoke-ImageInspect
 
 function Invoke-ImageBuild {
     param(
-        [Parameter(Mandatory)]
-        [string]$Project,
+        [Parameter(Mandatory = $true)]
+        [string] $Project,
 
-        [Parameter(Mandatory)]
-        [string]$Environment,
+        [Parameter(Mandatory = $true)]
+        [string] $Environment,
 
-        [switch]$Push,
-        [switch]$Remove,
-        [switch]$NoCache
+        [switch] $Push,
+        [switch] $Remove,
+        [switch] $NoCache
     )
     $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json
     $projectConfig = $config.dockerBuildProjects.($project)
@@ -230,11 +224,11 @@ Set-Alias 'di-build' Invoke-ImageBuild
 
 function Invoke-ImageSave {
     param(
-        [Parameter(Mandatory)]
-        [string]$Image,
+        [Parameter(Mandatory = $true)]
+        [string] $Image,
 
-        [Parameter(Mandatory)]
-        [string]$OutputFile
+        [Parameter(Mandatory = $true)]
+        [string] $OutputFile
     )
     docker image save $image --output $OutputFile
 }
@@ -245,9 +239,8 @@ Set-Alias 'di-save' Invoke-ImageSave
 function Invoke-ImageLoad {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$ImageFile
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $ImageFile
     )
     process {
         docker image load --input $ImageFile
@@ -260,9 +253,8 @@ Set-Alias 'di-load' Invoke-ImageLoad
 function Invoke-ImageRM {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Image
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Image
     )
     process {
         docker image rm $Image
@@ -297,9 +289,8 @@ Set-Alias 'dv-ls' Invoke-VolumeLS
 function Invoke-VolumeInspect {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Volume
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Volume
     )
     process {
         docker volume inspect $Volume
@@ -312,9 +303,8 @@ Set-Alias 'dv-inspect' Invoke-VolumeInspect
 function Invoke-VolumeRM {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Volume
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Volume
     )
     process {
         docker volume rm $Volume
@@ -342,9 +332,8 @@ Set-Alias 'dn-ls' Invoke-NetworkLS
 function Invoke-NetworkRM {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [Parameter(ValueFromPipeline)]
-        [string]$Network
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Network
     )
     process {
         docker network rm $Network
@@ -363,8 +352,8 @@ Set-Alias 'dn-prune' Invoke-NetworkPrune
 
 function Invoke-Shell {
     param(
-        [Parameter(Mandatory)]
-        [string]$Container
+        [Parameter(Mandatory = $true)]
+        [string] $Container
     )
     docker container exec -it $Container /bin/bash
 }
@@ -374,12 +363,12 @@ Set-Alias 'd-shell' Invoke-Shell
 
 function Invoke-DockerCompose {
     param(
-        [Parameter(Mandatory)]
-        [string]$Project,
+        [Parameter(Mandatory = $true)]
+        [string] $Project,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory = $true)]
         [ValidateSet('up', 'down')]
-        [string]$Direction
+        [string] $Direction
     )
     $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
     if ($null -ne $dockerComposeProjects.($project)) {
@@ -405,7 +394,7 @@ Set-Alias 'd-comp' Invoke-DockerCompose
 
 function Invoke-DockerHelp {
     param(
-        [string]$command = $null    
+        [string] $command = $null    
     )
     $helpInformation = Get-Content "$PSScriptRoot\help.json" | ConvertFrom-Json
     if ($null -eq $command) {

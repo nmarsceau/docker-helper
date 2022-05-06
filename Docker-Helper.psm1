@@ -210,7 +210,7 @@ function Invoke-ImageBuild {
                 foreach ($credential in $config.dockerPushCredentials) {
                     Write-Output $credential.password | docker login $credential.domain --username $credential.username --password-stdin
                 }
-                docker image push $tag
+                docker image push $projectConfig.tags.($environment)
             }
             if ($Remove) {
                 docker image rm $projectConfig.tags.($environment)

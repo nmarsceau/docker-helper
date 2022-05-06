@@ -163,6 +163,24 @@
                 }
             ]
         },
+        "di-pull": {
+            "fullDockerCommand": "docker image pull",
+            "parameters": [
+                {
+                    "name": "image",
+                    "description": "The image to pull."
+                }
+            ]
+        },
+        "di-push": {
+            "fullDockerCommand": "docker image push",
+            "parameters": [
+                {
+                    "name": "image",
+                    "description": "The image to push."
+                }
+            ]
+        },
         "di-save": {
             "fullDockerCommand": "docker image save",
             "parameters": [

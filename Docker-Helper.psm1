@@ -222,6 +222,28 @@ function Invoke-ImageBuild {
 Set-Alias 'di-build' Invoke-ImageBuild
 
 
+function Invoke-ImagePull {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Image
+    )
+    docker image pull $Image
+}
+
+Set-Alias 'di-pull' Invoke-ImagePull
+
+
+function Invoke-ImagePush {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Image
+    )
+    docker image push $Image
+}
+
+Set-Alias 'di-push' Invoke-ImagePush
+
+
 function Invoke-ImageSave {
     param(
         [Parameter(Mandatory = $true)]

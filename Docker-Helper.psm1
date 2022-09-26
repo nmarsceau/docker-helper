@@ -390,32 +390,50 @@ function Invoke-Shell {
 Set-Alias 'd-shell' Invoke-Shell
 
 
+function Get-DockerComposeProjects {
+    $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
+    $projectNames = foreach ($project in $dockerComposeProjects.PSObject.Properties) {
+        New-Object PSObject -Property @{
+            "Docker Compose Projects" = $project.Name
+        }
+    }
+    $projectNames | Format-Table "Docker Compose Projects"
+}
+
+
 function Invoke-DockerCompose {
     param(
         [Parameter(Mandatory = $true)]
         [string] $Project,
 
-        [Parameter(Mandatory = $true)]
-        [ValidateSet('up', 'down')]
         [string] $Direction
     )
-    $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
-    if ($null -ne $dockerComposeProjects.($project)) {
-        $arguments = @('--file', $dockerComposeProjects.($project).composeFile)
-        if ($null -ne $dockerComposeProjects.($project).envFile) {
-            $arguments += '--env-file'
-            $arguments += $dockerComposeProjects.($project).envFile
-        }
-        if ('up' -eq $Direction) {
-            $arguments += 'up'
-            $arguments += '-d'
-        }
-        else {
-            $arguments += 'down'
-        }
-        docker compose $arguments
+    if ($Project -eq 'ls' -and $Direction -eq '') {
+        Get-DockerComposeProjects
+        return
     }
-    else {Write-Output 'Invalid project specified.'}
+    if ('up' -ne $Direction -and 'down' -ne $Direction) {
+        Write-Output 'Invalid direction specified.'
+        return
+    }
+    $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
+    if ($null -eq $dockerComposeProjects.($project)) {
+        Write-Output 'Invalid project specified.'
+        return
+    }
+    $arguments = @('--file', $dockerComposeProjects.($project).composeFile)
+    if ($null -ne $dockerComposeProjects.($project).envFile) {
+        $arguments += '--env-file'
+        $arguments += $dockerComposeProjects.($project).envFile
+    }
+    if ('up' -eq $Direction) {
+        $arguments += 'up'
+        $arguments += '-d'
+    }
+    else {
+        $arguments += 'down'
+    }
+    docker compose $arguments
 }
 
 Set-Alias 'd-c' Invoke-DockerCompose

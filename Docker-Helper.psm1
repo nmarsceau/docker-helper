@@ -406,7 +406,7 @@ function Invoke-DockerCompose {
         else {
             $arguments += 'down'
         }
-        docker-compose $arguments
+        docker compose $arguments
     }
     else {Write-Output 'Invalid project specified.'}
 }

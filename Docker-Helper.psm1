@@ -418,7 +418,7 @@ function Invoke-DockerCompose {
     else {Write-Output 'Invalid project specified.'}
 }
 
-Set-Alias 'd-comp' Invoke-DockerCompose
+Set-Alias 'd-c' Invoke-DockerCompose
 
 
 function Invoke-DockerHelp {

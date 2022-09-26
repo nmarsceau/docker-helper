@@ -95,7 +95,7 @@ AliasesToExport = @(
     'dn-rm',
     'dn-prune',
     'd-shell',
-    'd-comp',
+    'd-c',
     'd-help'
 )
 

@@ -172,18 +172,37 @@ function Invoke-ImageInspect {
 Set-Alias 'di-inspect' Invoke-ImageInspect
 
 
+function Get-DockerBuildProjects {
+    $dockerBuildProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerBuildProjects
+    $projectNames = foreach ($project in $dockerBuildProjects.PSObject.Properties) {
+        New-Object PSObject -Property @{
+            "Docker Build Projects" = $project.Name
+        }
+    }
+    if ($projectNames.Length -eq 0) {
+        $projectNames += New-Object PSObject -Property @{
+            "Docker Build Projects" = ' -- None -- '
+        }
+    }
+    $projectNames | Format-Table "Docker Build Projects"
+}
+
+
 function Invoke-ImageBuild {
     param(
         [Parameter(Mandatory = $true)]
         [string] $Project,
 
-        [Parameter(Mandatory = $true)]
         [string] $Environment,
 
         [switch] $Push,
         [switch] $Remove,
         [switch] $NoCache
     )
+    if ($Project -eq 'ls' -and $Environment -eq '') {
+        Get-DockerBuildProjects
+        return
+    }
     $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json
     $projectConfig = $config.dockerBuildProjects.($project)
     if ($null -eq $projectConfig) {
@@ -395,6 +414,11 @@ function Get-DockerComposeProjects {
     $projectNames = foreach ($project in $dockerComposeProjects.PSObject.Properties) {
         New-Object PSObject -Property @{
             "Docker Compose Projects" = $project.Name
+        }
+    }
+    if ($projectNames.Length -eq 0) {
+        $projectNames += New-Object PSObject -Property @{
+            "Docker Compose Projects" = ' -- None -- '
         }
     }
     $projectNames | Format-Table "Docker Compose Projects"

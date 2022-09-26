@@ -336,6 +336,13 @@ function Invoke-VolumeRM {
 Set-Alias 'dv-rm' Invoke-VolumeRM
 
 
+function Invoke-VolumePrune {
+    docker volume prune --force
+}
+
+Set-Alias 'dv-prune' Invoke-VolumePrune
+
+
 function Invoke-NetworkLS {
     param(
         [switch] $IPv6,

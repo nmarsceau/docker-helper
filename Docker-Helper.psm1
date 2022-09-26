@@ -403,7 +403,9 @@ function Invoke-Shell {
         [Parameter(Mandatory = $true)]
         [string] $Container
     )
-    docker container exec -it $Container /bin/bash
+    $hasBash = ($null -ne (docker container exec $Container which bash))
+    $shell = $hasBash ? '/bin/bash' : '/bin/sh'
+    docker container exec -it $Container $shell
 }
 
 Set-Alias 'd-shell' Invoke-Shell

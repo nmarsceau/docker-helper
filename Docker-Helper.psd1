@@ -105,7 +105,7 @@ AliasesToExport = @(
 ModuleList = @('Docker-Helper')
 
 # List of all files packaged with this module
-FileList = @('.\.gitignore', '.\Docker-Helper.psd1', '.\Docker-Helper.psm1', '.\example-config.json', '.\help.json', '.\LICENSE', '.\README.md')
+FileList = @('.\.gitignore', '.\src\container.ps1', '.\src\image.ps1', '.\src\volume.ps1', '.\src\network.ps1', '.\src\compose.ps1', '.\src\help.ps1', '.\Docker-Helper.psd1', '.\Docker-Helper.psm1', '.\example-config.json', '.\help.json', '.\LICENSE', '.\README.md')
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{

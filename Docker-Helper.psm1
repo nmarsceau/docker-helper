@@ -377,6 +377,20 @@ function Invoke-NetworkLS {
 Set-Alias 'dn-ls' Invoke-NetworkLS
 
 
+function Invoke-NetworkInspect {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Network
+    )
+    process {
+        docker network inspect $Network
+    }
+}
+
+Set-Alias 'dn-inspect' Invoke-NetworkInspect
+
+
 function Invoke-NetworkRM {
     [CmdletBinding()]
     param(

@@ -1,5 +1,5 @@
 function Get-DockerComposeProjects {
-    $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
+    $dockerComposeProjects = (Get-Content "$PSScriptRoot\..\config.json" | ConvertFrom-Json).dockerComposeProjects
     $projectNames = foreach ($project in $dockerComposeProjects.PSObject.Properties) {
         New-Object PSObject -Property @{
             "Docker Compose Projects" = $project.Name
@@ -29,7 +29,7 @@ function Invoke-DockerCompose {
         Write-Output 'Invalid direction specified.'
         return
     }
-    $dockerComposeProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerComposeProjects
+    $dockerComposeProjects = (Get-Content "$PSScriptRoot\..\config.json" | ConvertFrom-Json).dockerComposeProjects
     if ($null -eq $dockerComposeProjects.($project)) {
         Write-Output 'Invalid project specified.'
         return

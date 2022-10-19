@@ -2,7 +2,7 @@ function Invoke-DockerHelp {
     param(
         [string] $command = $null    
     )
-    $helpInformation = Get-Content "$PSScriptRoot\help.json" | ConvertFrom-Json
+    $helpInformation = Get-Content "$PSScriptRoot\..\help.json" | ConvertFrom-Json
     if ($null -eq $command) {
         Write-Output "`nDocker Helper is a collection of helper functions for working with Docker.`n"
         $availableCommands = ForEach ($command in $helpInformation.commands.PSObject.Properties) {

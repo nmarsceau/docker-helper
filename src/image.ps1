@@ -28,7 +28,7 @@ Set-Alias 'di-inspect' Invoke-ImageInspect
 
 
 function Get-DockerBuildProjects {
-    $dockerBuildProjects = (Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json).dockerBuildProjects
+    $dockerBuildProjects = (Get-Content "$PSScriptRoot\..\config.json" | ConvertFrom-Json).dockerBuildProjects
     $projectNames = foreach ($project in $dockerBuildProjects.PSObject.Properties) {
         New-Object PSObject -Property @{
             "Docker Build Projects" = $project.Name
@@ -58,7 +58,7 @@ function Invoke-ImageBuild {
         Get-DockerBuildProjects
         return
     }
-    $config = Get-Content "$PSScriptRoot\config.json" | ConvertFrom-Json
+    $config = Get-Content "$PSScriptRoot\..\config.json" | ConvertFrom-Json
     $projectConfig = $config.dockerBuildProjects.($project)
     if ($null -eq $projectConfig) {
         Write-Output 'Invalid project specified.'
